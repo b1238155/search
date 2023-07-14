@@ -22,10 +22,13 @@ jobs:
         run: npm install
 
       - name: Build the React app
-        run: npm run build
+        run: |
+          REPO_NAME=$(basename $GITHUB_REPOSITORY)
+          echo "Building $REPO_NAME"
+          npm run build
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
           branch: gh-pages
-          folder: ./build
+          folder: build
